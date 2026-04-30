@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BARSUK | Premium Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --gold: #c5a059;
+            --dark-gold: #967a43;
+            --black: #0a0a0a;
+            --dark-grey: rgba(17, 17, 17, 0.75); 
+            --white: #f4f4f4;
+            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://e.radikal.host/2026/04/27/b199bbbd5c6ec37ff2180b328f851472.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%);
+            z-index: 1;
+        }
+
+        .noise {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 2;
+            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 80px;
+            margin-bottom: 20px;
+            animation: fadeInDown 1.5s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-svg-logo {
+            width: 140px;
+            height: 140px;
+            filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.3));
+            transition: var(--transition);
+        }
+
+        .main-svg-logo:hover {
+            transform: scale(1.05) rotate(5deg);
+            filter: drop-shadow(0 0 25px rgba(197, 160, 89, 0.6));
+        }
+
+        .brand-name {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 15px;
+            font-size: 0.85rem;
+            margin-top: 20px;
+            font-weight: 400;
+            font-family: 'Montserrat', sans-serif;
+            opacity: 0.8;
+        }
+
+        header {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-weight: 700;
+            opacity: 0;
+            animation: fadeInUp 1.2s forwards 0.3s;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .hero-title span { color: var(--gold); }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            font-weight: 200;
+            letter-spacing: 8px;
+            color: #ccc;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 1.2s forwards 0.6s;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .about-section {
+            padding: 100px 5%;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .about-card {
+            background: rgba(17, 17, 17, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 60px 40px;
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .about-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.1);
+        }
+
+        .about-title {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            color: var(--white);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #ddd;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+            letter-spacing: 1px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            text-align: left;
+        }
+
+        .service-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border-left: 1px solid var(--gold);
+            background: rgba(197, 160, 89, 0.05);
+            transition: var(--transition);
+        }
+
+        .service-item:hover {
+            background: rgba(197, 160, 89, 0.1);
+            transform: translateX(10px);
+        }
+
+        .service-icon {
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .service-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .service-content p {
+            font-size: 0.95rem;
+            color: #bbb;
+            font-weight: 300;
+        }
+
+        section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 1px;
+            background: var(--gold);
+            margin: 25px auto;
+        }
+
+        .shop-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .shop-card {
+            position: relative;
+            background: var(--dark-grey);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            width: 380px;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .shop-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            background: rgba(25, 25, 25, 0.85);
+        }
+
+        .shop-visual {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            background-image: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .shop-card:hover .shop-visual {
+            filter: brightness(0.6);
+        }
+
+        .shop-icon {
+            width: 60px;
+            height: 60px;
+            color: var(--gold);
+            stroke-width: 1px;
+            transition: var(--transition);
+            z-index: 2;
+            filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.4));
+        }
+
+        .shop-card:hover .shop-icon {
+            transform: scale(1.2);
+            color: var(--white);
+            filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.8));
+        }
+
+        .shop-content {
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .shop-category {
+            font-size: 0.7rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            display: block;
+        }
+
+        .shop-name {
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .shop-desc {
+            font-size: 0.9rem;
+            color: #bbb;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .shop-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .btn-demo {
+            display: block;
+            width: fit-content;
+            margin: 10px auto 0;
+            padding: 12px 30px;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            color: #ccc;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-demo:hover {
+            border-color: var(--white);
+            color: var(--white);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .lead-section {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 120px 5%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .lead-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .lead-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, rgba(21, 21, 21, 0.9), rgba(10, 10, 10, 0.9));
+            border: 1px solid var(--gold);
+            padding: 60px;
+            max-width: 1100px;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .lead-info { text-align: left; }
+        .lead-info h3 { text-align: left; font-size: 2.2rem; margin-bottom: 15px; }
+
+        .btn-gold {
+            padding: 20px 45px;
+            background: var(--gold);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .btn-gold:hover { background: var(--white); transform: scale(1.05); }
+
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+
+        footer {
+            text-align: center;
+            padding: 80px 20px;
+            color: #aaa;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .tg-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .tg-link:hover {
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .tg-icon {
+            width: 28px;
+            height: 28px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+        }
+
+        @media (max-width: 768px) { 
+            .shop-card { width: 100%; }
+            .hero-title { font-size: 2.2rem; }
+            .lead-card { flex-direction: column; text-align: center; padding: 40px; }
+            .lead-info { text-align: center; margin-bottom: 30px; }
+            .lead-info h3 { text-align: center; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+
+        .luxury-icon {
+            width: 30px;
+            height: 30px;
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-wrapper">
+        <div class="bg-overlay"></div>
+        <div class="noise"></div>
+    </div>
+
+    <div class="logo-container">
+        <svg class="main-svg-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="80" height="80" rx="2" stroke="#c5a059" stroke-width="2" fill="none" transform="rotate(45 50 50)" />
+            <rect x="15" y="15" width="70" height="70" rx="2" stroke="#c5a059" stroke-width="1" fill="none" transform="rotate(45 50 50)" />
+            <text x="50%" y="55%" text-anchor="middle" fill="#c5a059" font-family="Playfair Display" font-size="32" font-weight="bold">B</text>
+        </svg>
+        <div class="brand-name">BARSUK</div>
+    </div>
+
+    <header>
+        <h1 class="hero-title">BAR<span>SUK</span></h1>
+        <p class="hero-subtitle">Архитектура премиального веба</p>
+    </header>
+
+    <div class="about-section">
+        <div class="about-card">
+            <h2 class="about-title">О BARSUK</h2>
+            <p class="about-text">
+                Я создаю не просто сайты, а высокотехнологичные цифровые инструменты, которые работают на репутацию и прибыль вашего бизнеса. Мой подход базируется на трех столпах: 
+                <strong>безупречная эстетика</strong>, <strong>глубокая психология конверсии</strong> и <strong>техническое совершенство</strong>.
+            </p>
+            
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon"><i data-lucide="layout"></i></div>
+                    <div class="service-content">
+                        <h4>Премиум Лендинги</h4>
+                        <p>Разработка архитектуры интерфейсов, где каждый пиксель продуман для того, чтобы превратить случайного посетителя в вашего лояльного клиента.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i data-lucide="bot"></i></div>
+                    <div class="service-content">
+                        <h4>Интеллектуальные Боты</h4>
+                        <p>Создание сложных Telegram-экосистем. Автоматизация бизнес-процессов, которая освобождает ваше время и масштабирует продажи без участия человека.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <h2 class="section-title">Избранные решения</h2>
+        <div class="shop-grid">
+            <div class="shop-card">
+                <div class="shop-visual" style="background-image: url('https://images.unsplash.com/photo-1515562141207-7c8f2795693f?auto=format&fit=crop&w=600&q=80');">
+                    <i data-lucide="gem" class="shop-icon"></i>
+                </div>
+                <div class="shop-content">
+                    <span class="shop-category">Jewelry House</span>
+                    <div class="shop-name">Ювелирный Дом</div>
+                    <p class="shop-desc">Эстетика абсолютной роскоши. Идеально для эксклюзивных брендов и бутиков.</p>
+                    <div class="shop-price">4 000 ₽</div>
+                    <a href="https://barsuk2356.github.io/jewelery/" class="btn-demo" target="_blank">Смотреть демо</a>
+                </div>
+            </div>
+
+            <div class="shop-card">
+                <div class="shop-visual" style="background-image: url('https://images.unsplash.com/photo-1566073776459-3f563be8c1d1?auto=format&fit=crop&w=600&q=80');">
+                    <i data-lucide="hotel" class="shop-icon"></i>
+                </div>
+                <div class="shop-content">
+                    <span class="shop-category">Hospitality</span>
+                    <div class="shop-name">Премиум Отель</div>
+                    <p class="shop-desc">Стиль высокого гостеприимства для элитных отелей и частных резиденций.</p>
+                    <div class="shop-price">3 500 ₽</div>
+                    <a href="https://barsuk2356.github.io/hotel2/" class="btn-demo" target="_blank">Смотреть демо</a>
+                </div>
+            </div>
+
+            <div class="shop-card">
+                <div class="shop-visual" style="background-image: url('https://images.unsplash.com/photo-1503951906201-a75fefe5a267?auto=format&fit=crop&w=600&q=80');">
+                    <i data-lucide="scissors" class="shop-icon"></i>
+                </div>
+                <div class="shop-content">
+                    <span class="shop-category">Lifestyle</span>
+                    <div class="shop-name">Элитный Барбершоп</div>
+                    <p class="shop-desc">Мужественный и строгий стиль для бьюти-сервисов премиум-класса.</p>
+                    <div class="shop-price">2 000 ₽</div>
+                    <a href="https://barsuk2356.github.io/barbershop/" class="btn-demo" target="_blank">Смотреть демо</a>
+                </div>
+            </div>
+
+            <div class="shop-card">
+                <div class="shop-visual" style="background-image: url('https://images.unsplash.com/photo-1582672076605-d2767674a73a?auto=format&fit=crop&w=600&q=80');">
+                    <i data-lucide="waves" class="shop-icon"></i>
+                </div>
+                <div class="shop-content">
+                    <span class="shop-category">Entertainment</span>
+                    <div class="shop-name">Аквапарк Резорт</div>
+                    <p class="shop-desc">Динамичный дизайн для зон отдыха и развлекательных центров.</p>
+                    <div class="shop-price">3 000 ₽</div>
+                    <a href="https://barsuk2356.github.io/aquapark/" class="btn-demo" target="_blank">Смотреть демо</a>
+                </div>
+            </div>
+
+            <div class="shop-card">
+                <div class="shop-visual" style="background-image: url('https://images.unsplash.com/photo-1587132131737-a40d7731827a?auto=format&fit=crop&w=600&q=80');">
+                    <i data-lucide="trees" class="shop-icon"></i>
+                </div>
+                <div class="shop-content">
+                    <span class="shop-category">Entertainment</span>
+                    <div class="shop-name">Парк Развлечений</div>
+                    <p class="shop-desc">Масштабный интерфейс для парков, фестивалей и крупных событий.</p>
+                    <div class="shop-price">2 500 ₽</div>
+                    <a href="https://barsuk2356.github.io/park/" class="btn-demo" target="_blank">Смотреть демо</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="lead-section">
+        <h2 class="section-title">Работа с заявками</h2>
+        <div class="lead-container">
+            <div class="lead-card">
+                <div class="lead-info">
+                    <span class="card-category">Real Estate Moscow</span>
+                    <h3 style="text-align:left;">Недвижимость Москва</h3>
+                    <p>Инструмент для привлечения премиальных клиентов на рынке элитной недвижимости столицы.</p>
+                </div>
+                <div style="display:flex; align-items:center; gap:20px;">
+                    <i data-lucide="building-2" class="luxury-icon"></i>
+                    <a href="https://barsuk2356.github.io/moscow/" class="btn-gold" target="_blank">Перейти к кейсу</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 BARSUK. Crafted for Perfection.</p>
+        <a href="https://t.me/findxxb" class="tg-link" target="_blank">
+            <svg class="tg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 2L15 21L11 13L3 9L22 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 8L9 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 2L11 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            @findxxb
+        </a>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+    </script>
+</body>
+</html>
