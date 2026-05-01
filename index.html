@@ -449,13 +449,40 @@
             stroke-width: 1.5;
         }
 
+        /* ===== ПАДАЮЩИЕ ЗОЛОТЫЕ ЧАСТИЦЫ ===== */
+        .particle {
+            position: fixed;
+            top: -10px;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, #c5a059, #ffd700);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFall linear infinite;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 5px rgba(197, 160, 89, 0.8);
+        }
+        
+        @keyframes particleFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         @media (max-width: 768px) { 
             .shop-card { width: 100%; }
-            .hero-title { font-size: 2.2rem; }
+            .hero-title { font-size: 2.2rem; letter-spacing: 8px; }
             .lead-card { flex-direction: column; text-align: center; padding: 40px; }
             .lead-info { text-align: center; margin-bottom: 30px; }
             .lead-info h3 { text-align: center; }
             .services-grid { grid-template-columns: 1fr; }
+            .brand-name { letter-spacing: 8px; font-size: 0.7rem; }
         }
 
         .luxury-icon {
@@ -613,7 +640,29 @@
     </footer>
 
     <script>
-      lucide.createIcons();
+        lucide.createIcons();
+
+        // ===== ПАДАЮЩИЕ ЗОЛОТЫЕ ЧАСТИЦЫ =====
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + '%';
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            const duration = Math.random() * 5 + 3;
+            particle.style.animationDuration = duration + 's';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(particle);
+            setTimeout(() => {
+                if (particle && particle.parentNode) particle.remove();
+            }, duration * 1000);
+        }
+
+        setInterval(() => {
+            const count = Math.floor(Math.random() * 3) + 1;
+            for (let i = 0; i < count; i++) createParticle();
+        }, 300);
     </script>
 </body>
 </html>
